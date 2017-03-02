@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="ApplicationName">VoiceControl</string>
+  <string name="connectionM">Connection</string>
+  <string name="voicetestM">Voice test</string>
+  <string name="settingM">Setting</string>
+  <string name="submitC">Submit</string>
+  <string name="cancelC">Cancel</string>
+  <string name="speakC">Speaking</string>
+  <string name="settingC">Setting</string>
+  <string name="speakV">Speaking</string>
+  <string name="settingV">Setting</string>
+  <string name="textlanguage">Language</string>
+  <string name="textmode">Night Mode</string>
+  <string name="done">Done</string>
+</resources>
