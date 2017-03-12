@@ -4,8 +4,10 @@ using System;
 using Android.Widget;
 using Android.Content;
 using Android.Speech;
-using Java.Util;
 using System.Collections.Generic;
+
+using VoiceControl.Net;
+using System.Collections;
 
 namespace VoiceControl
 {
@@ -17,7 +19,7 @@ namespace VoiceControl
         Button sp;
         Button set;
 
-        int RESPONCERESULT = 99;
+        int RESPONCERESULT = 1234;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,32 +36,6 @@ namespace VoiceControl
             
             sp.Click += (object sender, EventArgs e) =>
             {
-                
-                /*recorder.SetAudioSource(AudioSource.Mic);
-                recorder.SetOutputFormat(OutputFormat.RawAmr);
-                recorder.SetAudioEncoder(AudioEncoder.AmrNb);
-                recorder.SetOutputFile(path);
-                recorder.Prepare();
-                recorder.Start();
-                recorder.Stop();
-                recorder.Reset();
-                recorder.Release();
-
-                var speech = SpeechClient.Create();
-                var longOperation = speech.AsyncRecognize(new RecognitionConfig()
-                {
-                    Encoding = RecognitionConfig.Types.AudioEncoding.Linear16,
-                    SampleRate = 16000,
-                }, RecognitionAudio.FromFile(path));
-                longOperation = longOperation.PollUntilCompleted();
-                var response = longOperation.Result;
-                foreach (var result in response.Results)
-                {
-                    foreach (var alternative in result.Alternatives)
-                    {
-                        vtext.SetText(alternative.Transcript,TextView.BufferType.Normal);
-                    }
-                }*/
                 speak();
             };
 
@@ -75,7 +51,8 @@ namespace VoiceControl
             try
             {
                 Intent intent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
-                intent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
+                intent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelWebSearch);
+                intent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
                 intent.PutExtra(RecognizerIntent.ExtraPrompt, "Start Speaking");
                 StartActivityForResult(intent, RESPONCERESULT);
             }
@@ -94,14 +71,15 @@ namespace VoiceControl
             
             if (requestCode == RESPONCERESULT && resultCode == Result.Ok)
             {
-                IList<string> results = data.GetStringArrayListExtra(RecognizerIntent.ExtraResults);
+                IList<string> results = data.GetStringArrayListExtra(RecognizerIntent.ExtraResults);    
                 string resultString = "";
-                
+
                 for (int i = 0; i < results.Count; i++)
                 {
-                    resultString += results[i];
+                    resultString = results[i];
                 }
-                vtext.Append(resultString);
+                vtext.Append(resultString + "/" + StringURL.REG_W(resultString));
+                vtext.Append("\n");
             }
             base.OnActivityResult(requestCode, resultCode, data);
         }

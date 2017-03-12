@@ -41,10 +41,23 @@ namespace VoiceControl.Net
                         Thread.Sleep(100);
                         continue;
                     }
+                    else a = "Time out.\n";
                 }
             } while (time < RETRY_TIME);
             return a;
         }
+
+        /*public static void reconnect(string HostIP, int HostPort)
+        {
+            if(clientSocket != null)
+            {
+                if(clientSocket.Connected == false)
+                {
+                    IPAddress ipAddress = IPAddress.Parse(HostIP);
+                    clientSocket.Connect(ipAddress, HostPort);
+                }
+            }
+        }*/
 
         public static string send(string input)
         {
@@ -64,13 +77,13 @@ namespace VoiceControl.Net
         {
             string a = "";
 
-            if(clientSocket.Connected == true)
+            if (clientSocket.Connected == true)
             {
                 clientSocket.Shutdown(SocketShutdown.Both);
                 clientSocket.Close();
-                a = "Disconnected.\n";
+                a = "Disconnected.";
             }
-            a = "No connection existed.\n";
+            else a = "No connection existed.";
             return a;
         }
     }

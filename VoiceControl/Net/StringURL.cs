@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace VoiceControl.Net
 {
@@ -33,5 +35,85 @@ namespace VoiceControl.Net
             }
             return true;
         }
+
+        public static string REG_W(string msg)
+        {
+            int c = 0;
+            string results = "";
+            string[] a = msg.Split(' ');
+
+            foreach(string i in a)
+            {
+                c++;
+                if (place.Contains(i))
+                {
+                    switch (i)
+                    {
+                        case "kitchen":
+                            foreach(string j in a)
+                            {
+                                if (open.Contains(j)) return "A";
+                            }
+                            foreach (string j in a)
+                            {
+                                if (close.Contains(j)) return "a";
+                            }
+                            break;
+                        case "bedroom":
+                            foreach (string j in a)
+                            {
+                                if (open.Contains(j)) return "B";
+                            }
+                            foreach (string j in a)
+                            {
+                                if (close.Contains(j)) return "b";
+                            }
+                            break;
+                    }
+                }
+                else if (open.Contains(i))
+                {
+                    results = "enable";
+                }
+                else if (close.Contains(i))
+                {
+                    results = "disable";
+                }
+                else if (crazy.Contains(i))
+                {
+                    results = "T";
+                }
+            }
+
+            if (c == a.Length && results == "") results = "2";
+
+            return results;
+        }
+
+        private static string[] place =
+        {    "kitchen",
+            "bedroom"
+        };
+
+        private static string[] open =
+        {
+            "open",
+            "on",
+            "up"
+        };
+
+        private static string[] close =
+        {
+            "close",
+            "off",
+            "down"
+        };
+
+        private static string[] crazy =
+        {
+            "crazy",
+            "dance",
+            "shinning"
+        };
     }
 }
