@@ -16,24 +16,24 @@ namespace VoiceControl
             // Set our view from the "main" layout resource
             SetContentView (Resource.Layout.Main);
 
-            Button connection = FindViewById<Button>(Resource.Id.connectionM);
+            Button connection = FindViewById<Button>(Resource.Id.connectionM);  
             connection.Click += (object sender, EventArgs e) =>
             {
-                Intent conIntent = new Intent(this,typeof(Connection));
+                Intent conIntent = new Intent(this,typeof(Connection)); //A button for switching to Connection View
                 StartActivity(conIntent);
             };
 
             Button voicetest = FindViewById<Button>(Resource.Id.voicetestM);
             voicetest.Click += (object sender, EventArgs e) =>
             {
-                Intent voiIntent = new Intent(this, typeof(Voicetest));
+                Intent voiIntent = new Intent(this, typeof(Voicetest)); //A button for switching to Voice Test View
                 StartActivity(voiIntent);
             };
 
             Button setting = FindViewById<Button>(Resource.Id.settingM);
             setting.Click += (object sender, EventArgs e) =>
             {
-                Intent setIntent = new Intent(this, typeof(Setting));
+                Intent setIntent = new Intent(this, typeof(Setting));   //A button for switching to Setting View
                 StartActivity(setIntent);
             };
         }

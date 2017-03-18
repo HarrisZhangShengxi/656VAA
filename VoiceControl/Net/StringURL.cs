@@ -16,7 +16,7 @@ namespace VoiceControl.Net
 {
     class StringURL
     {
-        public static bool isEmpty(string input)
+        public static bool isEmpty(string input)    //Determine the EditView of the IP address and the port are empty
         {
             if (input == null || "".Equals(input))
             {
@@ -36,7 +36,7 @@ namespace VoiceControl.Net
             return true;
         }
 
-        public static string REG_W(string msg)
+        public static string REG_W(string msg)  //Identify the result and get key words for sending signal to server
         {
             int c = 0;
             string results = "";
@@ -90,26 +90,26 @@ namespace VoiceControl.Net
             return results;
         }
 
-        private static string[] place =
+        private static string[] place = //A set of string of place
         {    "kitchen",
             "bedroom"
         };
 
-        private static string[] open =
+        private static string[] open =  //A set of string of open
         {
             "open",
             "on",
             "up"
         };
 
-        private static string[] close =
+        private static string[] close = //A set of string of close
         {
             "close",
             "off",
             "down"
         };
 
-        private static string[] crazy =
+        private static string[] crazy = //A set of string of crazy
         {
             "crazy",
             "dance",

@@ -34,14 +34,14 @@ namespace VoiceControl
             sp = FindViewById<Button>(Resource.Id.speakV);
             set = FindViewById<Button>(Resource.Id.settingV);
             
-            sp.Click += (object sender, EventArgs e) =>
+            sp.Click += (object sender, EventArgs e) => //A button for activating Google Speech Recognition
             {
                 speak();
             };
 
             set.Click += (object sender, EventArgs e) =>
             {
-                Intent setIntent = new Intent(this, typeof(Setting));
+                Intent setIntent = new Intent(this, typeof(Setting));   //A button for switching to Setting View
                 StartActivity(setIntent);
             };
         }
@@ -50,9 +50,9 @@ namespace VoiceControl
         {
             try
             {
-                Intent intent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
-                intent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelWebSearch);
-                intent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
+                Intent intent = new Intent(RecognizerIntent.ActionRecognizeSpeech); //Set a new intent for Recognizing initialization
+                intent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelWebSearch);  //Set Language Model
+                intent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);   //Optimize output results to get a accurate result
                 intent.PutExtra(RecognizerIntent.ExtraPrompt, "Start Speaking");
                 StartActivityForResult(intent, RESPONCERESULT);
             }
@@ -71,12 +71,12 @@ namespace VoiceControl
             
             if (requestCode == RESPONCERESULT && resultCode == Result.Ok)
             {
-                IList<string> results = data.GetStringArrayListExtra(RecognizerIntent.ExtraResults);    
+                IList<string> results = data.GetStringArrayListExtra(RecognizerIntent.ExtraResults);    //Get a result array list 
                 string resultString = "";
 
                 for (int i = 0; i < results.Count; i++)
                 {
-                    resultString = results[i];
+                    resultString = results[i];  //Transform the array list into a string
                 }
                 vtext.Append(resultString + "/" + StringURL.REG_W(resultString));
                 vtext.Append("\n");

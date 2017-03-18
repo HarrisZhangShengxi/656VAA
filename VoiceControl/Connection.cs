@@ -53,11 +53,11 @@ namespace VoiceControl
 
             sub.Click += (object sender, EventArgs e) =>
             {
-                if (StringURL.isEmpty(ip.Text) || StringURL.isEmpty(port.Text))
+                if (StringURL.isEmpty(ip.Text) || StringURL.isEmpty(port.Text)) //Determine whether the IP address and the port are empty
                 {
                     cv.Append("Please input IP address and port.\n");
                 }
-                else if (SocketClient.clientSocket != null && SocketClient.clientSocket.Connected == true)
+                else if (SocketClient.clientSocket != null && SocketClient.clientSocket.Connected == true)  //Determine whether the client connects to server
                 {
                     cv.Append("Already Connected.\n");
                 }
@@ -66,7 +66,7 @@ namespace VoiceControl
                     can.Enabled = true;
                     sp.Enabled = true;
                     cv.Append("Connection in process.\n");
-                    cv.Append(SocketClient.SocketConnect(ip.Text, Convert.ToInt32(port.Text)));
+                    cv.Append(SocketClient.SocketConnect(ip.Text, Convert.ToInt32(port.Text))); //Connect to server
                 }
             };
 
@@ -99,7 +99,7 @@ namespace VoiceControl
                 }
                 else
                 {
-                    Toast.MakeText(this.ApplicationContext, SocketClient.disconnect(), ToastLength.Short).Show();
+                    Toast.MakeText(this.ApplicationContext, SocketClient.disconnect(), ToastLength.Short).Show();   //Set the back key for disconnecting the connection
                     Finish();
                 }
                 return true;
@@ -139,7 +139,7 @@ namespace VoiceControl
                     resultString = results[i];
                 }
                 vt.Append(resultString + "\n");
-                cv.Append(SocketClient.send(resultString + "/" + StringURL.REG_W(resultString)));
+                cv.Append(SocketClient.send(resultString + "/" + StringURL.REG_W(resultString)));   //Send the results to the server
             }
             base.OnActivityResult(requestCode, resultCode, data);
         }

@@ -18,9 +18,9 @@ namespace VoiceControl.Net
 
             string a = "";
 
-            IPAddress ipAddress = IPAddress.Parse(HostIP);
+            IPAddress ipAddress = IPAddress.Parse(HostIP);  //Transform the string into IPAddress
 
-            clientSocket = new Socket(
+            clientSocket = new Socket(  //Initialize the socket for client using TCP
               AddressFamily.InterNetwork,
               SocketType.Stream,
               ProtocolType.Tcp);
@@ -29,14 +29,14 @@ namespace VoiceControl.Net
             {
                 try
                 {
-                    clientSocket.Connect(ipAddress, HostPort);
+                    clientSocket.Connect(ipAddress, HostPort);  //Connect to Server
                     a = "Client is connected.\n";
                     break;
                 }
                 catch (Exception e)
                 {
                     time++;
-                    if (time < RETRY_TIME)
+                    if (time < RETRY_TIME)  //If timeout, try to reconncet
                     {
                         Thread.Sleep(100);
                         continue;
@@ -59,7 +59,7 @@ namespace VoiceControl.Net
             }
         }*/
 
-        public static string send(string input)
+        public static string send(string input) //send data to server
         {
             string a = "";
 
@@ -73,7 +73,7 @@ namespace VoiceControl.Net
             return a;
         }
 
-        public static string disconnect()
+        public static string disconnect()   //disconnection
         {
             string a = "";
 
