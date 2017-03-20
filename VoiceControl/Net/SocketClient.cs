@@ -73,6 +73,20 @@ namespace VoiceControl.Net
             return a;
         }
 
+        public static string receive()  //receive data from server
+        {
+            string b = "";
+            byte[] receiveBuffer = null;
+
+            if (clientSocket.Connected == true)
+            {
+                clientSocket.Receive(receiveBuffer);
+                char[] a = Encoding.ASCII.GetChars(receiveBuffer);
+                b = a.ToString();
+            }
+            return b;
+        }
+
         public static string disconnect()   //disconnection
         {
             string a = "";

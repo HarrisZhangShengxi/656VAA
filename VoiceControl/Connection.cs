@@ -67,6 +67,7 @@ namespace VoiceControl
                     sp.Enabled = true;
                     cv.Append("Connection in process.\n");
                     cv.Append(SocketClient.SocketConnect(ip.Text, Convert.ToInt32(port.Text))); //Connect to server
+                    cv.Append(SocketClient.receive() + "\n");   //Receive data from server
                 }
             };
 
@@ -140,6 +141,7 @@ namespace VoiceControl
                 }
                 vt.Append(resultString + "\n");
                 cv.Append(SocketClient.send(resultString + "/" + StringURL.REG_W(resultString)));   //Send the results to the server
+                cv.Append(SocketClient.receive() + "\n");   //Receive data from server
             }
             base.OnActivityResult(requestCode, resultCode, data);
         }
