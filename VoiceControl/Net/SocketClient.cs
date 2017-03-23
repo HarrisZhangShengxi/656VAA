@@ -20,7 +20,8 @@ namespace VoiceControl.Net
 
             IPAddress ipAddress = IPAddress.Parse(HostIP);  //Transform the string into IPAddress
 
-            clientSocket = new Socket(  //Initialize the socket for client using TCP
+            //Initialize the socket for client using TCP
+            clientSocket = new Socket(  
               AddressFamily.InterNetwork,
               SocketType.Stream,
               ProtocolType.Tcp);
@@ -73,7 +74,7 @@ namespace VoiceControl.Net
             return a;
         }
 
-        public static string receive()  //receive data from server
+        /*public static string receive()  //receive data from server
         {
             string b = "";
             byte[] receiveBuffer = null;
@@ -85,7 +86,7 @@ namespace VoiceControl.Net
                 b = a.ToString();
             }
             return b;
-        }
+        }*/
 
         public static string disconnect()   //disconnection
         {
